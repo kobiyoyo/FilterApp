@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+import DataTable from './components/DataTable';
 
-function App() {
+const App = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+      getUser()
+    },
+    [data]);
+    const getUser = async () => {
+      try{
+         const response = await axios.get('https://jsonplaceholder.typicode.com/users')
+         const data = await response.data;
+         setData(data)
+      }
+      catch(error){
+          console.log("error",error)
+      }
+     }
+
+  console.log(data);
   return (
+   
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+       <DataTable data={data} />
+      <h1>Sweetie</h1>
+      {data.map((user)=>(
+        <h1>{user.name}</h1>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
