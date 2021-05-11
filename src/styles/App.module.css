@@ -1,0 +1,7 @@
+
+.InputWrapper {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ padding: 3rem;
+}
